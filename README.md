@@ -1,2 +1,2 @@
-# ini-web
+# oni-web
 Scala project for main objectnirvana.com website
