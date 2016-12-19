@@ -97,7 +97,8 @@ lazy val frontend = project.in(file("frontend")).enablePlugins(ScalaJSPlugin)
           FileFunction.cached(streams.value.cacheDirectory / x.getName, FilesInfo.lastModified, FilesInfo.lastModified) {
             (f: Set[File]) =>
               val fsPath = f.head.getAbsolutePath.drop(new File("").getAbsolutePath.length)
-              files = "http://localhost:12345" + fsPath :: files
+              files = "https://www.objectnirvana.com" + fsPath :: files
+              // files = "http://localhost:12345" + fsPath :: files
               f
           }(Set(x))
       }
@@ -109,3 +110,4 @@ lazy val frontend = project.in(file("frontend")).enablePlugins(ScalaJSPlugin)
   )
 
   
+enablePlugins(JavaServerAppPackaging)
