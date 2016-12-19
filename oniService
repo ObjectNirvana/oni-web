@@ -1,0 +1,80 @@
+#!/bin/bash
+# jetty service for oni-web
+
+### BEGIN INIT INFO
+# Provides: OniWebService
+# Defalt-Start: 2 3 4 5
+# Default-Stop: 0 6
+# Description: ONI Web server.
+### END INIT INFO
+
+CMD=$1
+PIDFILE_PATH="/home/mike/oni-web/oni.pid"
+PROCESS_NAME="jetty-runner"
+
+runJava () {
+	jetty_version=9.3.8.v20160314
+	nohup java -XX:+CMSClassUnloadingEnabled \
+		-Xmx512m \
+		-jar jetty-runner-${jetty_version}.jar \
+		--host 127.0.0.1 \
+		--port 8090 \
+		oni_web.jar > oni.out 2>&1 &
+}
+
+start (){ 	
+	cd /image
+	echo -n "Starting oniService "
+	if [ -f $PIDFILE_PATH ]; then
+		PID=$(cat $PIDFILE_PATH)
+		PID_STRING=$(ps -p $PID -wf)
+		if [[ $PID_STRING =~ "$PROCESS_NAME" ]]; then
+			echo "Process is already running (pid $PID)"
+		else
+			runJava
+			echo $! > $PIDFILE_PATH
+			echo "[OK]"
+		fi
+	else
+		runJava
+        echo $! > $PIDFILE_PATH
+		echo "[OK]"
+	fi
+}
+
+stop (){
+        echo -n "Stopping oniService "	
+	if [ -f $PIDFILE_PATH ]; then
+                PID=$(cat $PIDFILE_PATH)
+		PID_STRING=$(ps -p $PID -wf)
+                if [[ $PID_STRING =~ "$PROCESS_NAME" ]]; then
+			while sleep 1
+				echo -n '.'
+				kill -0 $PID >/dev/null 2>&1
+			do
+				kill -9 $PID
+			done
+		fi
+	fi
+	echo " [OK]"
+}
+
+restart (){
+        stop
+        start
+}
+
+case "$1" in
+    start)
+        $1
+        ;;
+    stop)
+        $1
+        ;;
+    restart)
+        restart
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart|reload|force-reload}"
+        exit 2
+esac
