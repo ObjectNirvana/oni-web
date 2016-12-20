@@ -15,8 +15,10 @@ case object RPCDemoViewPresenter extends DefaultViewPresenterFactory[RPCDemoStat
   val input = Property[String]("")
   input.listen((value: String) => {
     serverRpc.hello(value).onComplete {
-      case Success(resp) => serverResponse.set(resp)
-      case Failure(_) => serverResponse.set("Error")
+      case Success(resp) =>
+        serverResponse.set(resp)
+      case Failure(_) =>
+        serverResponse.set("Error")
     }
   })
 

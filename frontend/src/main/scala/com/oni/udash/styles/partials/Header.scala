@@ -17,7 +17,7 @@ object HeaderStyles extends StyleSheet.Inline {
     position.relative,
     backgroundColor.black,
     height(StyleConstants.Sizes.HeaderHeight px),
-    fontSize(1.6 rem),
+    fontSize(1.8 rem),
     zIndex(99),
 
     MediaQueries.tabletPortrait(
@@ -34,7 +34,7 @@ object HeaderStyles extends StyleSheet.Inline {
   )
 
   val headerText = style(
-    fontSize(180 %%),
+    fontSize(220 %%),
     UdashFonts.acumin(FontWeight.Bold),
     color.white
   )
@@ -49,7 +49,7 @@ object HeaderStyles extends StyleSheet.Inline {
     StyleUtils.relativeMiddle,
     display.inlineBlock,
     verticalAlign.top,
-    width(130 px),
+    width(330 px),
     marginRight(25 px),
 
     MediaQueries.tabletPortrait(

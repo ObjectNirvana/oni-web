@@ -13,14 +13,20 @@ class IndexView extends View {
   import scalatags.JsDom.all._
 
   private val content = div(
-    h2("Thank you for choosing Udash! Take a look at following demo pages:"),
+    h2("Object Oriented Software"),
+    ul(DemoStyles.stepsList)(
+      li(a(DemoStyles.underlineLink, href := BindingDemoState().url)("Binding demo")),
+      li(a(DemoStyles.underlineLink, href := BindingDemoState("From index").url)("Binding demo with URL argument")),
+      li(a(DemoStyles.underlineLink, href := RPCDemoState.url)("RPC demo")),
+      li(a(DemoStyles.underlineLink, href := DemoStylesState.url)("ScalaCSS demo view"))
+    ),
+    h2("Functional Programming"),
     ul(DemoStyles.stepsList)(
       li(a(DemoStyles.underlineLinkBlack, href := BindingDemoState().url)("Binding demo")),
-      li(a(DemoStyles.underlineLinkBlack, href := BindingDemoState("From index").url)("Binding demo with URL argument")),
-      li(a(DemoStyles.underlineLinkBlack, href := RPCDemoState.url)("RPC demo")),
       li(a(DemoStyles.underlineLinkBlack, href := DemoStylesState.url)("ScalaCSS demo view"))
     ),
-    h3("Read more"),
+    h2("Aspect Oriented Programming"),
+    h3("Resources"),
     ul(
       li(
         a(DemoStyles.underlineLinkBlack, href := "http://udash.io/", target := "_blank")("Visit Udash Homepage.")

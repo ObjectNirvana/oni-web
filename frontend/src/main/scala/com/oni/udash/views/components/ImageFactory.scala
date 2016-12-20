@@ -1,6 +1,9 @@
 package com.oni.udash.views.components
+
 import org.scalajs.dom
+
 import scalatags.JsDom
+import scalatags.JsDom.all.img
 
 class ImageFactory(prefix: String) {
   import scalatags.JsDom.all._

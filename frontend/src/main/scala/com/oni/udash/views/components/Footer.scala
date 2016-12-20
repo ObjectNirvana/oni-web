@@ -25,7 +25,7 @@ object Footer {
             )
           )
         ),
-        p(FooterStyles.footerCopyrights)("Proudly made by ", a(FooterStyles.footerAvsystemLink, href := ExternalUrls.avsystem, target := "_blank")("AVSystem"))
+        p(FooterStyles.footerCopyrights)("Proudly made by ", a(FooterStyles.footerAvsystemLink, href := ExternalUrls.oniservices, target := "_blank")("AVSystem"))
       )
     )
   ).render

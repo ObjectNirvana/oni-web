@@ -11,7 +11,6 @@ import io.udash.DefaultViewPresenterFactory
 import io.udash.View
 import scalacss.ScalatagsCss.styleaToJsDomTag
 import scalatags.JsDom.all.div
-import scalatags.JsDom.all.h1
 import scalatags.JsDom.tags2.main
 
 object RootViewPresenter extends DefaultViewPresenterFactory[RootState.type](() => new RootView)
@@ -25,7 +24,7 @@ class RootView extends View {
     Header.getTemplate,
     main(GlobalStyles.main)(
       div(GlobalStyles.body)(
-        h1("ONI"),
+        //h1("Programming Paradigms"),
         child)),
     Footer.getTemplate)
 

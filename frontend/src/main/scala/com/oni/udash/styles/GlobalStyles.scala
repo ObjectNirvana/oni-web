@@ -77,6 +77,7 @@ object GlobalStyles extends StyleSheet.Inline {
       position.relative,
       height(100 %%),
       fontSize(1.6 rem),
+      background := "linear-gradient(black, blue)",
       backgroundColor(StyleConstants.Colors.Blue),
       color(StyleConstants.Colors.Cyan)
     ),
