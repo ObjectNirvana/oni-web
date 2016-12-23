@@ -3,6 +3,7 @@ import sbt._
 
 object Dependencies {
   val udashVersion = "0.4.0"
+  val scalatagsVersion = "0.6.2"
   val udashJQueryVersion = "1.0.0"
   val logbackVersion = "1.1.3"
   val jettyVersion = "9.3.11.v20160721"
@@ -14,6 +15,7 @@ object Dependencies {
 
   val frontendDeps = Def.setting(Seq[ModuleID](
     "io.udash" %%% "udash-core-frontend" % udashVersion,
+    "com.lihaoyi" %% "scalatags" % scalatagsVersion,
     "io.udash" %%% "udash-jquery" % udashJQueryVersion,
     "io.udash" %%% "udash-rpc-frontend" % udashVersion,
     "com.github.japgolly.scalacss" %%% "core" % "0.5.0",

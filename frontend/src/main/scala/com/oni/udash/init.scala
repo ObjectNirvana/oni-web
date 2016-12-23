@@ -2,10 +2,19 @@ package com.oni.udash
 
 import io.udash._
 import io.udash.wrappers.jquery._
-import org.scalajs.dom.{Element, document}
+import org.scalajs.dom.{ Element, document }
 
 import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport
+import com.oni.udash.styles.OniStyles
+import scalacss.Defaults._
+import scalacss.ScalatagsCss._
+import scalatags.JsDom._
+import com.oni.udash.styles.GlobalStyles
+import com.oni.udash.styles.DemoStyles
+import com.oni.udash.styles.partials.FooterStyles
+import com.oni.udash.styles.partials.HeaderStyles
+import org.scalajs.dom.raw.HTMLStyleElement
 
 object Context {
   implicit val executionContext = scalajs.concurrent.JSExecutionContext.Implicits.queue
@@ -17,7 +26,7 @@ object Context {
   import io.udash.rpc._
   import com.oni.udash.rpc._
   val serverRpc = DefaultServerRPC[MainClientRPC, MainServerRPC](new RPCService)
-       
+
 }
 
 object Init extends JSApp with StrictLogging {
@@ -32,17 +41,11 @@ object Init extends JSApp with StrictLogging {
       } else {
         applicationInstance.run(appRoot.get)
 
-import scalacss.Defaults._
-import scalacss.ScalatagsCss._
-import scalatags.JsDom._
-import com.oni.udash.styles.GlobalStyles
-import com.oni.udash.styles.DemoStyles
-import com.oni.udash.styles.partials.FooterStyles
-import com.oni.udash.styles.partials.HeaderStyles
-jQ(GlobalStyles.render[TypedTag[org.scalajs.dom.raw.HTMLStyleElement]].render).insertBefore(appRoot.get)
-jQ(DemoStyles.render[TypedTag[org.scalajs.dom.raw.HTMLStyleElement]].render).insertBefore(appRoot.get)
-jQ(FooterStyles.render[TypedTag[org.scalajs.dom.raw.HTMLStyleElement]].render).insertBefore(appRoot.get)
-jQ(HeaderStyles.render[TypedTag[org.scalajs.dom.raw.HTMLStyleElement]].render).insertBefore(appRoot.get)
+        jQ(GlobalStyles.render[TypedTag[org.scalajs.dom.raw.HTMLStyleElement]].render).insertBefore(appRoot.get)
+        jQ(DemoStyles.render[TypedTag[org.scalajs.dom.raw.HTMLStyleElement]].render).insertBefore(appRoot.get)
+        jQ(OniStyles.render[TypedTag[org.scalajs.dom.raw.HTMLStyleElement]].render).insertBefore(appRoot.get)
+        jQ(FooterStyles.render[TypedTag[org.scalajs.dom.raw.HTMLStyleElement]].render).insertBefore(appRoot.get)
+        jQ(HeaderStyles.render[TypedTag[HTMLStyleElement]].render).insertBefore(appRoot.get)
       }
     })
   }

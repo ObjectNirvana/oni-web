@@ -156,7 +156,7 @@ object HeaderStyles extends StyleSheet.Inline {
     width(100 %%),
     backgroundColor(StyleConstants.Colors.Red),
     height(4 px),
-    transformOrigin := "calc(100% - 9px) 0",
+    transformOrigin := "calc(100% - 9px) 50",
     transform := "scaleX(.2)",
     zIndex(9),
 
