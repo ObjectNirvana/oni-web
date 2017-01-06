@@ -13,10 +13,10 @@ import scalacss.Defaults.cssComposition
 import scalacss.Defaults.cssRegister
 import scalacss.internal.Compose
 
-object OniStyles2 extends StyleSheet.Standalone {
+object CsStyles2 extends StyleSheet.Standalone {
   import dsl._
 
-  "#box figure" - (
+  "#box_cs figure" - (
       display.block,
       position.absolute,
       padding( 2 rem ),
@@ -28,7 +28,7 @@ object OniStyles2 extends StyleSheet.Standalone {
       color(white)
     )
 
-//    "#box.panels-backface-invisible figure" - (
+//    "#box_cs.panels-backface-invisible figure" - (
 //      backfaceVisibility.hidden
 //    )
 
@@ -36,7 +36,7 @@ object OniStyles2 extends StyleSheet.Standalone {
     val yw = 300 px
     val zw = 300 px
 
-    "#box" - (
+    "#box_cs" - (
       width( 100%%),
       height(100%%),
       position.absolute,
@@ -45,45 +45,45 @@ object OniStyles2 extends StyleSheet.Standalone {
       transition := "transform 1s"
     )
 
-    "#box .OniStyles-frontSide, #box .OniStyles-backSide" - (
+    "#box_cs .CsStyles-frontSide, #box_cs .CsStyles-backSide" - (
       width(xw),
       height(yw)
     )
 
-    "#box .OniStyles-rightSide, #box .OniStyles-leftSide" - (
+    "#box_cs .CsStyles-rightSide, #box_cs .CsStyles-leftSide" - (
       width(zw),
-      height(yw),
-      left(100 px)
+      height(yw)
+      //left(100 px)
     )
 
-    "#box .OniStyles-topSide, #box .OniStyles-bottomSide" - (
+    "#box_cs .CsStyles-topSide, #box_cs .CsStyles-bottomSide" - (
       width(xw),
       height(zw),
-      top(50 px),
+      //top(50 px),
       lineHeight(20 px)
     )
 
-    "#box.show-frontSide" - (
+    "#box_cs.show-frontSide" - (
       transform:= "translateZ(  -50px )"
     )
-    "#box.show-backSide" - (
-      transform:= "translateZ( -50px ) rotateX( -180deg )"
+    "#box_cs.show-backSide" - (
+      transform:= "translateZ( -50px ) rotateY( 10deg )"
     )
-    "#box.show-rightSide" - (
-      transform:= "translateZ( -150px ) rotateY(  -90deg )"
+    "#box_cs.show-rightSide" - (
+      transform:= "translateZ( -50px ) rotateY( 20deg )"
     )
-    "#box.show-leftSide" - (
-      transform:= "translateZ( -150px ) rotateY(   90deg )"
+    "#box_cs.show-leftSide" - (
+      transform:= "translateZ( -50px ) rotateY( 30deg )"
     )
-    "#box.show-topSide" - (
-      transform:= "translateZ( -100px ) rotateX(  -90deg )"
+    "#box_cs.show-topSide" - (
+      transform:= "translateZ( -50px ) rotateY( 40deg )"
     )
-    "#box.show-bottomSide" - (
-      transform:= "translateZ( -100px ) rotateX(   90deg )"
+    "#box_cs.show-bottomSide" - (
+      transform:= "translateZ( -50px ) rotateY( 50deg )"
     )
 }
 
-object OniStyles extends StyleSheet.Inline {
+object CsStyles extends StyleSheet.Inline {
   import dsl._
 
   val linkHoverAnimation = keyframes(
@@ -104,7 +104,7 @@ object OniStyles extends StyleSheet.Inline {
       perspective(1200 px)
     )
 
-  val cubeBox = style(
+  val cubebox_cs = style(
       width( 100%%),
       height(100%%),
       position.absolute,
@@ -219,38 +219,44 @@ object OniStyles extends StyleSheet.Inline {
         counterIncrement := "steps",
         content := "counters(steps, '.')\".\"")))
 
-    val intensity = 80
-    val frontColor  = rgb( 0, 0, intensity )
-    val backColor   = rgb( 0, intensity, 0 )
-    val leftColor   = rgb( intensity, 0, 0 )
-    val rightColor  = rgb( 0, intensity, intensity )
-    val topColor    = rgb( intensity, 0, intensity )
-    val bottomColor = rgb( intensity, intensity, 0 )
+  val intensity = 80
+  val frontColor  = rgb( 0, 0, intensity )
+  val backColor   = rgb( 0, intensity, 0 )
+  val leftColor   = rgb( intensity, 0, 0 )
+  val rightColor  = rgb( 0, intensity, intensity )
+  val topColor    = rgb( intensity, 0, intensity )
+  val bottomColor = rgb( intensity, intensity, 0 )
 
-    val zxlate = 70
+  val zxlate = 10
 
   val frontSide = style(
     background := frontColor, //  := hsla( 0, 100 %%, 50 %%, 0.7 ),
+    left(20 px),
     transform := s"translateZ( ${zxlate}px )")
 
   val backSide = style(
     background := backColor, // hsla( 160, 100 %%, 50 %%, 0.7 ),
-    transform := s"rotateX( -180deg ) translateZ( ${zxlate}px )")
+    left(40 px),
+    transform := s"rotateY( 20deg ) translateZ( ${zxlate}px )")
 
   val rightSide = style(
     background := rightColor, // hsla( 120, 100 %%, 50%%, 0.7 ),
-    transform := s"rotateY( 90deg ) translateZ( ${zxlate}px )")
+    left(60 px),
+    transform := s"rotateY( 40deg ) translateZ( ${zxlate}px )")
 
   val leftSide = style(
     background := leftColor, // hsla( 180, 100%%, 50%%, 0.7 ),
-    transform := s"rotateY(  -90deg ) translateZ( ${zxlate}px )")
+    left(80 px),
+    transform := s"rotateY(  60deg ) translateZ( ${zxlate}px )")
 
   val topSide = style(
     background := topColor, // hsla( 240, 100%%, 50%%, 0.7 ),
-    transform := s"rotateX(   90deg ) translateZ( ${zxlate}px )")
+    left(100 px),
+    transform := s"rotateY(  80deg ) translateZ( ${zxlate}px )")
 
   val bottomSide = style(
     background := bottomColor, // hsla( 300, 100%%, 50%%, 0.7 ),
-    transform := s"rotateX(  -90deg ) translateZ( ${zxlate}px )")
+    left(120 px),
+    transform := s"rotateY( 100deg ) translateZ( ${zxlate}px )")
 
 }

@@ -4,6 +4,19 @@ import Dependencies._
 
 name := "udash-app"
 
+resolvers ++= Seq(
+  "Typesafe Releases Repository" at "http://repo.typesafe.com/typesafe/releases/",
+  Resolver.url("sbt snapshot plugins", url("http://repo.scala-sbt.org/scalasbt/sbt-plugin-snapshots"))(Resolver.ivyStylePatterns),
+  Resolver.sonatypeRepo("snapshots"),
+  "Typesafe Snapshots Repository" at "http://repo.typesafe.com/typesafe/snapshots/",
+  Resolver.mavenLocal
+)
+
+resolvers += "snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+resolvers += "releases" at "https://oss.sonatype.org/content/repositories/releases"
+
+resolvers += "releases"  at "https://oss.sonatype.org/content/groups/scala-tools"
+
 version in ThisBuild := "0.1.0-SNAPSHOT"
 scalaVersion in ThisBuild := "2.11.8"
 organization in ThisBuild := "com.oni.udash"

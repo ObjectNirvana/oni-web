@@ -1,14 +1,19 @@
 package com.oni.udash.styles.partials
-import java.util.concurrent.TimeUnit
 
-import com.oni.udash.styles.constants.StyleConstants
-import com.oni.udash.styles.utils.{MediaQueries, StyleUtils}
+import java.util.concurrent.TimeUnit
 
 import scala.concurrent.duration.FiniteDuration
 import scala.language.postfixOps
-import scalacss.Defaults._
-import com.oni.udash.styles.fonts.UdashFonts
+
+import com.oni.udash.styles.constants.StyleConstants
 import com.oni.udash.styles.fonts.FontWeight
+import com.oni.udash.styles.fonts.UdashFonts
+import com.oni.udash.styles.utils.MediaQueries
+import com.oni.udash.styles.utils.StyleUtils
+
+import scalacss.Defaults.StyleSheet
+import scalacss.Defaults.cssComposition
+import scalacss.Defaults.cssRegister
 
 object HeaderStyles extends StyleSheet.Inline {
   import dsl._

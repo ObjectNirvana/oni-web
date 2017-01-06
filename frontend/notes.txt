@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.container {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  perspective: 1000px;
+}
+
+#cube {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+#cube figure {
+  margin: 0;
+  width: 196px;
+  height: 196px;
+  display: block;
+  position: absolute;
+  border: 2px solid black;
+}
+
+div {
+    width: 120px;
+    height: 70px;
+    font-size: 2em;
+    background-color: yellow;
+    border: 1px solid black;
+}
+#cube .front  { transform: rotateY(   0deg ); }
+#cube .back   { transform: rotateX( 180deg ); }
+#cube .right  { transform: rotateY(  90deg ); }
+#cube .left   { transform: rotateY( -90deg ); }
+#cube .top    { transform: rotateX(  90deg ); }
+#cube .bottom { transform: rotateX( -90deg ); }
+
+#cube .front  { transform: rotateY(   0deg ) translateZ( 100px ); }
+#cube .back   { transform: rotateX( 180deg ) translateZ( 100px ); }
+#cube .right  { transform: rotateY(  90deg ) translateZ( 100px ); }
+#cube .left   { transform: rotateY( -90deg ) translateZ( 100px ); }
+#cube .top    { transform: rotateX(  90deg ) translateZ( 100px ); }
+#cube .bottom { transform: rotateX( -90deg ) translateZ( 100px ); }
+
+#cube { transform: translateZ( -100px ); }
+
+#cube.show-front  { transform: translateZ( -100px ) rotateY(    0deg ); }
+#cube.show-back   { transform: translateZ( -100px ) rotateX( -180deg ); }
+#cube.show-right  { transform: translateZ( -100px ) rotateY(  -90deg ); }
+#cube.show-left   { transform: translateZ( -100px ) rotateY(   90deg ); }
+#cube.show-top    { transform: translateZ( -100px ) rotateX(  -90deg ); }
+#cube.show-bottom { transform: translateZ( -100px ) rotateX(   90deg ); }
+
+#cube { transition: transform 1s; }
+
+div#myDiv {
+    -webkit-transform: rotateX(30deg); /* Safari */
+    transform: rotateX(50deg) rotateY(20deg) rotateZ(33deg); /* Standard syntax */
+}
+https://desandro.github.io/3dtransforms/examples/cube-02-show-sides.html
+
+div#myDiv2 {
+    -webkit-transform: rotateX(30deg); /* Safari */
+    transform: rotateX(5deg) rotateY(20deg) rotateZ(33deg); /* Standard syntax */
+}
+div#myDiv3 {
+    -webkit-transform: rotateX(30deg); /* Safari */
+    transform: rotateX(50deg) rotateY(20deg) rotateZ(0deg); /* Standard syntax */
+}
+</style>
+</head>
+<body>
+<section class="container">
+  <div id="cube">
+    <figure class="front">1</figure>
+    <figure class="back">2</figure>
+    <figure class="right">3</figure>
+    <figure class="left">4</figure>
+    <figure class="top">5</figure>
+    <figure class="bottom">6</figure>
+  </div>
+</section>
+
+<div>
+T
+</div>
+
+<div id="myDiv">
+O
+</div>
+<div id="myDiv2">
+N
+</div>
+<div id="myDiv3">
+I
+</div>
+
+<p><b>Note:</b> Internet Explorer 9 (and earlier versions) does not support the rotateX() method.</p>
+
+</body>
+</html>
+

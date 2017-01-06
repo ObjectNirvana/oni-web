@@ -18,9 +18,19 @@ object Header {
   private lazy val template = header(HeaderStyles.header)(
     div(GlobalStyles.body, GlobalStyles.clearfix)(
       div(HeaderStyles.headerLeft, HeaderStyles.headerText)(
-        a(HeaderStyles.headerLogo, href := IndexState.url)(
-          "Object Nirvana" // Image("udash_logo_m.png", "Udash Framework", GlobalStyles.block)
-          )),
+        div(id:="head123")(),
+        script("""
+        window.setTimeout(function() {
+        var e = document.getElementById("oni-head");
+        var newHome = document.getElementById("head123");
+        newHome.appendChild(e);
+        // e.parentNode.removeChild(e);
+        }, 10);
+        """)
+//        a(HeaderStyles.headerLogo, href := IndexState.url)(
+//          "Object Nirvana" // Image("udash_logo_m.png", "Udash Framework", GlobalStyles.block)
+//          )
+          ),
       div(HeaderStyles.headerRight)(
         ul(HeaderStyles.headerSocial)(
           li(HeaderStyles.headerSocialItem)(
@@ -32,7 +42,7 @@ object Header {
               oniTooltip)),
           li(HeaderStyles.headerSocialItem)(
             a(href := ExternalUrls.oniservices, HeaderStyles.headerSocialLinkYellow, target := "_blank")(
-              Image("icon_avsystem.png", oni_tt),
+              Image("oni.jpg", oni_tt),
               oniTooltip)))))).render
 
   def oniTooltip: TypedTag[Element] =

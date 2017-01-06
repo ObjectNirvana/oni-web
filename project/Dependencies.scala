@@ -7,6 +7,8 @@ object Dependencies {
   val udashJQueryVersion = "1.0.0"
   val logbackVersion = "1.1.3"
   val jettyVersion = "9.3.11.v20160721"
+  val jqueryVersion = "0.9.0"
+  val rxScalaVersion = "0.26.4"
 
   val crossDeps = Def.setting(Seq[ModuleID](
     "io.udash" %%% "udash-core-shared" % udashVersion,
@@ -14,6 +16,7 @@ object Dependencies {
   ))
 
   val frontendDeps = Def.setting(Seq[ModuleID](
+    "be.doeraene" %%% "scalajs-jquery" % jqueryVersion,
     "io.udash" %%% "udash-core-frontend" % udashVersion,
     "com.lihaoyi" %% "scalatags" % scalatagsVersion,
     "io.udash" %%% "udash-jquery" % udashJQueryVersion,
@@ -29,6 +32,8 @@ object Dependencies {
     "ch.qos.logback" % "logback-classic" % logbackVersion,
     "org.eclipse.jetty" % "jetty-server" % jettyVersion,
     "org.eclipse.jetty" % "jetty-servlet" % jettyVersion,
+    "io.reactivex" %% "rxscala" % rxScalaVersion,
+    "org.mongodb.scala" %% "mongo-scala-driver" % "1.2.1",
     "io.udash" %% "udash-rpc-backend" % udashVersion,
     "org.eclipse.jetty.websocket" % "websocket-server" % jettyVersion
   ))
