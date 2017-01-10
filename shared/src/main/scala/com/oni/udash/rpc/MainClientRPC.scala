@@ -5,6 +5,7 @@ import io.udash.rpc._
 
 @RPC
 trait MainClientRPC {
-  def push(number: Int): Unit
+  def push2(number: Int): Unit
+  def updateList(quals: List[String]): Unit
 }
        

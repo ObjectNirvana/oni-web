@@ -4,8 +4,11 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 import scala.language.implicitConversions
 
-import org.mongodb.scala._
+//import org.mongodb.scala._
 import rx.lang.{ scala => rx }
+import rx.Observable
+import rx.Subscription
+import rx.Observer
 
 object Implicits {
 
@@ -18,7 +21,8 @@ object Implicits {
 
     def subscribe() = {
       observable.subscribe(new Observer[T]() {
-        override def onSubscribe(s: Subscription) = {
+        //override 
+        def onSubscribe(s: Subscription) = {
           subscription = Some(s)
           rxSubscriber.add(new rx.Subscription() {
             private final val unsubscribed: AtomicBoolean = new AtomicBoolean
@@ -64,7 +68,7 @@ object Implicits {
 
     override def request(n: Long) = {
       if (isSubscribed) {
-        subscription.get.request(n)
+        //subscription.get.request(n)
       }
     }
 

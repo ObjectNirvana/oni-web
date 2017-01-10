@@ -15,7 +15,7 @@ class StatesToViewPresenterDef extends ViewPresenterRegistry[RoutingState] {
   override def matchStateToResolver(state: RoutingState): ViewPresenter[_ <: RoutingState] = state match {
     case RootState => RootViewPresenter
     case IndexState => IndexViewPresenter
-    case ComingSoonState => ComingSoonViewPresenter
+    case ComingSoonState => ComingSoonViewPresenter()
     case BindingDemoState(urlArg) => BindingDemoViewPresenter(urlArg)
     case RPCDemoState => RPCDemoViewPresenter
     case DemoStylesState => DemoStylesViewPresenter

@@ -30,7 +30,9 @@ class ApplicationServer(val port: Int, resourceBase: String) {
     import com.oni.udash.rpc._
     import scala.concurrent.ExecutionContext.Implicits.global
 
-    val config = new DefaultAtmosphereServiceConfig[MainServerRPC]((clientId) => new DefaultExposesServerRPC[MainServerRPC](new ExposedRpcInterfaces()(clientId)))
+    val config = new DefaultAtmosphereServiceConfig[MainServerRPC](
+        (clientId) => new DefaultExposesServerRPC[MainServerRPC](
+            new ExposedRpcInterfaces()(clientId)))
     val framework = new DefaultAtmosphereFramework(config)
 
     //Disabling all files scan during service auto-configuration,
@@ -51,5 +53,3 @@ class ApplicationServer(val port: Int, resourceBase: String) {
   contextHandler.addServlet(atmosphereHolder, "/atm/*")
        
 }
-
-       

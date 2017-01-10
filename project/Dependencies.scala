@@ -33,7 +33,9 @@ object Dependencies {
     "org.eclipse.jetty" % "jetty-server" % jettyVersion,
     "org.eclipse.jetty" % "jetty-servlet" % jettyVersion,
     "io.reactivex" %% "rxscala" % rxScalaVersion,
-    "org.mongodb.scala" %% "mongo-scala-driver" % "1.2.1",
+    //"org.mongodb.scala" %% "mongo-scala-driver" % "1.2.1",
+    //"org.mongodb" %% "casbah" % "3.1.1",
+    "com.github.salat" %% "salat" % "1.10.0",
     "io.udash" %% "udash-rpc-backend" % udashVersion,
     "org.eclipse.jetty.websocket" % "websocket-server" % jettyVersion
   ))

@@ -5,10 +5,35 @@ import com.oni.udash._
 import org.scalajs.dom.Element
 import scalacss.ScalatagsCss._
 import com.oni.udash.styles.CsStyles
+import com.oni.udash.ComingSoonState
+import scala.util.Success
+import scala.util.Failure
+import scala.concurrent.Future
+import com.oni.web.dom.Sq
 
-object ComingSoonViewPresenter extends DefaultViewPresenterFactory[ComingSoonState.type](() => new ComingSoonView)
+case class ComingSoonViewPresenter()
+  extends DefaultViewPresenterFactory[ComingSoonState.type](() => {
+    import com.oni.udash.Context._
 
-class ComingSoonView extends View {
+    val serverQualities = SeqProperty[Sq](List(Sq("1", "empty")))
+
+    val getList = serverRpc.getList()
+    getList.onComplete {
+      case Success(resp) =>
+        serverQualities.set(resp)
+      case Failure(_) =>
+        serverQualities.set(List(Sq("e", "Error")))
+    }
+
+    getList.value
+    // Future.sequence(getList)
+
+    val model = Property[String]("/")
+    new ComingSoonView(model, serverQualities)
+  })
+
+class ComingSoonView(model: Property[String],
+    serverQualities: SeqProperty[Sq]) extends View {
   import com.oni.udash.Context._
   import scalatags.JsDom.all._
 
@@ -25,20 +50,73 @@ class ComingSoonView extends View {
       button( id:="cb6", cls:="show-bottomSide")("Show 6")
   )
 
+  def saveQuality() = {
+    println("save q")
+    serverRpc.save(model.get)
+    model.set("")
+//    println("save q 2")
+//    serverRpc.hello(model.get).onComplete {
+//      case Success(a) =>
+//        println("a here")
+//      case Failure(f) =>
+//        println("a f here")
+//    }
+    println("get list")
+    serverRpc.getList().onComplete {
+      case Success(resp) =>
+        serverQualities.set(resp)
+      case Failure(_) =>
+        serverQualities.set(List(Sq("e1", "Error")))
+    }
+    println("saved")
+  }
+
+  var cbnum = 1
+
+  def nextButton(): Unit = {
+    import org.scalajs.jquery.jQuery
+    jQuery("#cb" + cbnum).click() // buttons(0).
+    cbnum += 1
+    if (cbnum > 6) cbnum = 1
+  }
+
+  //@tailrec
+  def startSpin(): Unit = {
+    import scala.scalajs.js.timers._
+
+    setTimeout(15000) { // note the absence of () =>
+      nextButton
+      startSpin()
+    }
+  }
+
   private val content = div(
     h2("What is Object Nirvana?"),
     div("Writing software in the coolest way possible."),
     div(CsStyles.cubeContainer)(
       div(id:="box_cs", `class`:="show-frontSide")(
-        figure(frontSide)(oop),
-        figure(backSide)(fp),
-        figure(rightSide)(fc),
-        figure(leftSide)(aop),
-        figure(topSide)(sec),
-        figure(bottomSide)(oni)
+        figure(frontSide)(div(h2("Object Oriented"), oop)),
+        figure(backSide)(div(h2("Functional Programming"), fp)),
+        figure(rightSide)(div(h2("First Class"), fc)),
+        figure(leftSide)(div(h2("Aspect Oriented"), aop)),
+        figure(topSide)(div(h2("Cybersecurity"), sec)),
+        figure(bottomSide)(div(h2("Nirvana"), oni))
+      )
+    ),
+    div(CsStyles.sqContainer)(
+      div(CsStyles.leftSq)(
+        h3("Tell us what makes writing software better:"),
+        TextInput.debounced(model, placeholder := "Enter your favorite software quality..."),
+        p("Your quality: ", bind(model)),
+        button(onclick := saveQuality _)("Submit Quality")
+      ),
+      div(CsStyles.rightSq)(
+        div("Submitted Qualities"),
+        ol( repeat(serverQualities)(sq => li(id:=sq.get.id)(sq.get.desc).render))
       )
     ),
     div( id:="options") (
+      p(onclick := startSpin _)("start spin"),
       p( id:="show-buttons")(
           buttons
       )
@@ -46,13 +124,30 @@ class ComingSoonView extends View {
     script("""
       var init = function() {
         var box = document.querySelector('.CsStyles-cubeContainer').children[0],
-          showPanelButtons = document.querySelectorAll('#show-buttons button'),
-          panelClassName = 'show-frontSide',
+          showPanelButtons = document.querySelectorAll('#show-buttons button');
+        var panelClassName = 'show-frontSide';
+        var figures = box.children;
 
-        onButtonClick = function( event ){
+        //alert('figure has ' + figures.length);
+        var clearFigs = function() {
+          for (var i=0; i<figures.length; i++) {
+            figures[i].removeClassName( 'CsStyles-near' );
+            //figures[i].addClassName( 'CsStyles-far' );
+            //alert('adding');
+          }
+        }
+
+        var onButtonClick = function( event ){
+          clearFigs();
           box.removeClassName( panelClassName );
           panelClassName = event.target.className;
-          box.addClassName( panelClassName );
+          var sideName = panelClassName.substring(5, panelClassName.length);
+          //alert('pancl class name = ' + panelClassName + ' side name ' + sideName);
+          window.setTimeout(function() {
+            box.addClassName( panelClassName );
+            // find side and add near
+            $('.CsStyles-'+sideName).addClass('CsStyles-near');
+          }, 2000);
         };
 
         for (var i=0, len = showPanelButtons.length; i < len; i++) {
