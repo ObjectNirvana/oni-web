@@ -10,7 +10,7 @@ class RPCService extends MainClientRPC {
       import scala.scalajs.js
       import js.Dynamic.{ global => g }
 
-      g.alert("Hello 2 from Scala")
+      //g.alert("Hello 2 from Scala")
       List("one")
   }
 }
