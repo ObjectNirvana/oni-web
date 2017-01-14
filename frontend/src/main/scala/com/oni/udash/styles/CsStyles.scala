@@ -30,6 +30,13 @@ object CsStyles2 extends StyleSheet.Standalone {
       color(white)
     )
 
+  ".CsStyles-middleSq li" - (
+    fontSize(15 px),
+    &.hover(
+      backgroundColor(red)
+    )
+  )
+
 //    "#box_cs.panels-backface-invisible figure" - (
 //      backfaceVisibility.hidden
 //    )
@@ -102,22 +109,30 @@ object CsStyles extends StyleSheet.Inline {
 
   val leftSq = style(
       float.left,
-      border( 1 px, solid, yellow ),
+      //border( 1 px, solid, yellow ),
+      width( 300 px ),
+      height( 200 px )
+  )
+
+  val middleSq = style(
+      float.left,
+      //border( 1 px, solid, yellow ),
+      paddingLeft(10 px),
       width( 300 px ),
       height( 200 px )
   )
 
   val rightSq = style(
       float.left,
-      border( 1 px, solid, yellow ),
+      //border( 1 px, solid, yellow ),
       paddingLeft(10 px),
       width( 300 px ),
       height( 200 px )
   )
 
   val sqContainer = style(
-      width( 700 px ),
-      height( 400 px )
+      width( 100 %% )
+      //height( 400 px )
   )
 
   val cubeContainer = style(

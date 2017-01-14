@@ -3,7 +3,11 @@ package com.oni.udash.jetty
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.handler.gzip.GzipHandler
 import org.eclipse.jetty.server.session.SessionHandler
-import org.eclipse.jetty.servlet.{DefaultServlet, ServletContextHandler, ServletHolder}
+import org.eclipse.jetty.servlet.{ DefaultServlet, ServletContextHandler, ServletHolder }
+import akka.actor.ActorSystem
+import akka.actor.Props
+import com.oni.udash.rpc.QualitiesActor
+import akka.actor.ActorRef
 
 class ApplicationServer(val port: Int, resourceBase: String) {
   private val server = new Server(port)
@@ -30,9 +34,12 @@ class ApplicationServer(val port: Int, resourceBase: String) {
     import com.oni.udash.rpc._
     import scala.concurrent.ExecutionContext.Implicits.global
 
-    val config = new DefaultAtmosphereServiceConfig[MainServerRPC](
-        (clientId) => new DefaultExposesServerRPC[MainServerRPC](
-            new ExposedRpcInterfaces()(clientId)))
+    val config = new DefaultAtmosphereServiceConfig[MainServerRPC]({
+      (clientId) =>
+        println("new expose")
+        new DefaultExposesServerRPC[MainServerRPC](
+          new ExposedRpcInterfaces(qualitiesService)(clientId))
+    })
     val framework = new DefaultAtmosphereFramework(config)
 
     //Disabling all files scan during service auto-configuration,
@@ -51,5 +58,11 @@ class ApplicationServer(val port: Int, resourceBase: String) {
     atmosphereHolder
   }
   contextHandler.addServlet(atmosphereHolder, "/atm/*")
-       
+
+  //  val cfg = ConfigFactory.parseString("akka.cluster.roles = [" + strRoles.mkString(", ") + "]")
+  //      .withFallback(ConfigFactory.load.getConfig("systems.workercluster"))
+
+  val system = ActorSystem("backend") // cfg.getString("system-name"), cfg)
+  val qualitiesService: ActorRef = system.actorOf(Props[QualitiesActor])
+
 }

@@ -9,6 +9,7 @@ object Dependencies {
   val jettyVersion = "9.3.11.v20160721"
   val jqueryVersion = "0.9.0"
   val rxScalaVersion = "0.26.4"
+  val akkaVersion = "2.4.3"
 
   val crossDeps = Def.setting(Seq[ModuleID](
     "io.udash" %%% "udash-core-shared" % udashVersion,
@@ -21,6 +22,7 @@ object Dependencies {
     "com.lihaoyi" %% "scalatags" % scalatagsVersion,
     "io.udash" %%% "udash-jquery" % udashJQueryVersion,
     "io.udash" %%% "udash-rpc-frontend" % udashVersion,
+    //"com.github.japgolly.scalajs-react" %%% "core" % "0.11.3",
     "com.github.japgolly.scalacss" %%% "core" % "0.5.0",
     "com.github.japgolly.scalacss" %%% "ext-scalatags" % "0.5.0"
   ))
@@ -29,6 +31,8 @@ object Dependencies {
   ))
 
   val backendDeps = Def.setting(Seq[ModuleID](
+    "com.typesafe.akka" %% "akka-actor" % akkaVersion,
+    "com.typesafe.akka" %% "akka-slf4j" % akkaVersion,
     "ch.qos.logback" % "logback-classic" % logbackVersion,
     "org.eclipse.jetty" % "jetty-server" % jettyVersion,
     "org.eclipse.jetty" % "jetty-servlet" % jettyVersion,

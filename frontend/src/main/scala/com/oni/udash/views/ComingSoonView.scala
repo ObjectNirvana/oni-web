@@ -29,10 +29,12 @@ case class ComingSoonViewPresenter()
     // Future.sequence(getList)
 
     val model = Property[String]("/")
-    new ComingSoonView(model, serverQualities)
+    val sqDetails = Property[String]("")
+    new ComingSoonView(model, sqDetails, serverQualities)
   })
 
 class ComingSoonView(model: Property[String],
+    sqDetails: Property[String],
     serverQualities: SeqProperty[Sq]) extends View {
   import com.oni.udash.Context._
   import scalatags.JsDom.all._
@@ -49,6 +51,12 @@ class ComingSoonView(model: Property[String],
       button( id:="cb5", cls:="show-topSide")("Show 5"),
       button( id:="cb6", cls:="show-bottomSide")("Show 6")
   )
+
+  def saveQualityDetails() = {
+    println("save qd")
+    sq = sq.map(_.copy(details = Some(sqDetails.get)))
+    serverRpc.saveDetails(sq.get.id, sqDetails.get)
+  }
 
   def saveQuality() = {
     println("save q")
@@ -90,6 +98,22 @@ class ComingSoonView(model: Property[String],
     }
   }
 
+  var sq: Option[Sq] = None
+
+  def getSqDetails(id: String)(): Unit = {
+    println("get details")
+    serverRpc.getSqDetails(id).onComplete {
+      case Success(resp) =>
+        sq = Some(resp)
+        model.set(resp.desc)
+        sqDetails.set(resp.details.getOrElse(""))
+      case Failure(_) =>
+        sq = None
+        sqDetails.set("Error")
+    }
+    println("got details")
+  }
+
   private val content = div(
     h2("What is Object Nirvana?"),
     div("Writing software in the coolest way possible."),
@@ -110,10 +134,20 @@ class ComingSoonView(model: Property[String],
         p("Your quality: ", bind(model)),
         button(onclick := saveQuality _)("Submit Quality")
       ),
+      div(CsStyles.middleSq)(
+        h3("Submitted Qualities"),
+        ol( repeat(serverQualities)(sq =>
+          li(id:=sq.get.id)(div(data.oid := sq.get.id, onclick := getSqDetails(sq.get.id.toString) _)(sq.get.desc)).render))
+      ),
       div(CsStyles.rightSq)(
-        div("Submitted Qualities"),
-        ol( repeat(serverQualities)(sq => li(id:=sq.get.id)(sq.get.desc).render))
+        h3("Software Quality Details"),
+        h4("Quality: ", bind(model)),
+        div(attr("editable"):=("true"))( bind(sqDetails) ),
+        p("Comments"),
+        TextInput.debounced(sqDetails, placeholder := "Describe why"),
+        button(onclick := saveQualityDetails _)("Save")
       )
+
     ),
     div( id:="options") (
       p(onclick := startSpin _)("start spin"),

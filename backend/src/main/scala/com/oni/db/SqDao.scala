@@ -11,8 +11,17 @@ import com.mongodb.casbah.Imports._
 import salat.dao.SalatDAO
 import com.oni.web.dom.Sq
 
-case class MonSq(_id:ObjectId = new ObjectId, desc: String) {
-  def toDom = Sq(_id.toHexString, desc)
+case class MonSq(_id:ObjectId = new ObjectId,
+    desc: String,
+    det: String = "",
+    details: Option[String] = None) {
+  def toDom = Sq(_id.toString, desc, details)
+  def toDomSmall = Sq(_id.toString, desc)
+}
+
+object MonSq {
+  def apply(sq: Sq): MonSq = MonSq(new ObjectId(sq.id), sq.desc, sq.details.getOrElse(""), sq.details)
+  
 }
 
 object SqDao
@@ -25,8 +34,36 @@ object SqApp {
     println("Inserted sq.id:" + id)
   }
 
+  def findById(id: String): Sq = {
+    SqDao.findOneById(new ObjectId(id)).get.toDom
+  }
+
+  def update(sq: Sq): Unit = {
+    try {
+      //SqDao.save(MonSq(sq))
+      SqDao.findOneById(new ObjectId(sq.id)) match {
+        case Some(obj) =>
+          println("got obj")
+          val mod = obj.copy(det = sq.details.getOrElse("x"),
+                details = sq.details)
+          SqDao.save(mod)
+          val dbo = grater[MonSq].asDBObject(mod)
+          println(s"updating to $dbo")
+          val r = SqDao.update(MongoDBObject("_id" -> sq.id), dbo, false, false)
+          println(s"r = $r")
+          val db1 = SqDao.findOneById(new ObjectId(sq.id))
+          println(s"db1 = $db1")
+        case None =>
+          println(s"id not found ${sq.id}")
+      }
+    } catch {
+      case t: Throwable =>
+        t.printStackTrace()
+    }
+  }
+
   def getAll: List[Sq] = {
-    SqDao.find(ref = MongoDBObject()).toList.map(_.toDom)
+    SqDao.find(ref = MongoDBObject()).toList.map(_.toDomSmall)
   }
 
   def main(args:Array[String]) = {

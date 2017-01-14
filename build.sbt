@@ -15,7 +15,7 @@ resolvers ++= Seq(
 resolvers += "snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 resolvers += "releases" at "https://oss.sonatype.org/content/repositories/releases"
 
-resolvers += "releases"  at "https://oss.sonatype.org/content/groups/scala-tools"
+resolvers += "tools-releases" at "https://oss.sonatype.org/content/groups/scala-tools"
 
 version in ThisBuild := "0.1.0-SNAPSHOT"
 scalaVersion in ThisBuild := "2.11.8"
@@ -32,6 +32,8 @@ scalacOptions in ThisBuild ++= Seq(
   "-Xfatal-warnings",
   "-Xlint:_,-missing-interpolator,-adapted-args"
 )
+
+ScctPlugin.instrumentSettings
 
 def crossLibs(configuration: Configuration) =
   libraryDependencies ++= crossDeps.value.map(_ % configuration)
@@ -57,6 +59,7 @@ lazy val backend = project.in(file("backend"))
   .settings(
     libraryDependencies ++= backendDeps.value,
     crossLibs(Compile),
+	ScctPlugin.instrumentSettings,
 
     compile <<= (compile in Compile),
     (compile in Compile) <<= (compile in Compile).dependsOn(copyStatics),
