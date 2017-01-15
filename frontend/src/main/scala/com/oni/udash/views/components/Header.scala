@@ -34,7 +34,7 @@ object Header {
       div(HeaderStyles.headerRight)(
         ul(HeaderStyles.headerSocial)(
           li(HeaderStyles.headerSocialItem)(
-            a(href := ExternalUrls.udashGithub, HeaderStyles.headerSocialLink, target := "_blank")(
+            a(href := ExternalUrls.oniWebGithub, HeaderStyles.headerSocialLink, target := "_blank")(
               Image("icon_github.png", "Github"))),
           li(HeaderStyles.headerSocialItem)(
             a(href := ExternalUrls.stackoverflow, HeaderStyles.headerSocialLinkYellow, target := "_blank")(

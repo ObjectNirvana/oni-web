@@ -16,6 +16,15 @@ import scalacss.internal.Compose
 object CsStyles2 extends StyleSheet.Standalone {
   import dsl._
 
+  "#sqd" - (
+      minHeight(1 rem),
+      minWidth(10 rem),
+      &.hover(
+        backgroundColor(brown),
+        border( 1 px, solid, gray)
+      )
+  )
+
   "#box_cs figure" - (
       display.block,
       position.absolute,
@@ -33,7 +42,7 @@ object CsStyles2 extends StyleSheet.Standalone {
   ".CsStyles-middleSq li" - (
     fontSize(15 px),
     &.hover(
-      backgroundColor(red)
+      backgroundColor:=!"#aa0000"
     )
   )
 

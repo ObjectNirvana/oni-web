@@ -54,8 +54,12 @@ class ComingSoonView(model: Property[String],
 
   def saveQualityDetails() = {
     println("save qd")
-    sq = sq.map(_.copy(details = Some(sqDetails.get)))
-    serverRpc.saveDetails(sq.get.id, sqDetails.get)
+    import org.scalajs.jquery.jQuery
+    val details = jQuery("#sqd").text
+    // sq = sq.map(_.copy(details = Some(sqDetails.get)))
+    sq = sq.map(_.copy(details = Some(details)))
+    // serverRpc.saveDetails(sq.get.id, sqDetails.get)
+    serverRpc.saveDetails(sq.get.id, details)
   }
 
   def saveQuality() = {
@@ -106,6 +110,8 @@ class ComingSoonView(model: Property[String],
       case Success(resp) =>
         sq = Some(resp)
         model.set(resp.desc)
+        import org.scalajs.jquery.jQuery
+        jQuery("#sqd").text(resp.details.getOrElse(""))
         sqDetails.set(resp.details.getOrElse(""))
       case Failure(_) =>
         sq = None
@@ -142,9 +148,9 @@ class ComingSoonView(model: Property[String],
       div(CsStyles.rightSq)(
         h3("Software Quality Details"),
         h4("Quality: ", bind(model)),
-        div(attr("editable"):=("true"))( bind(sqDetails) ),
-        p("Comments"),
-        TextInput.debounced(sqDetails, placeholder := "Describe why"),
+        div(id:="sqd", title:="click to edit", attr("contenteditable"):=("true"))( bind(sqDetails) ),
+        //p("Comments"),
+        //TextInput.debounced(sqDetails, placeholder := "Describe why"),
         button(onclick := saveQualityDetails _)("Save")
       )
 

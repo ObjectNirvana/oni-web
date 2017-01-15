@@ -1,7 +1,9 @@
 package com.oni.udash.config
 
 object ExternalUrls {
-  val udashGithub = "https://github.com/UdashFramework/"
+  //val udashGithub = "https://github.com/UdashFramework/"
+
+  val oniWebGithub = "https://github.com/ObjectNirvana/oni-web"
 
   val udashDemos = "https://github.com/UdashFramework/udash-demos"
 
