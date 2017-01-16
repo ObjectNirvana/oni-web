@@ -17,6 +17,7 @@ object CsStyles2 extends StyleSheet.Standalone {
   import dsl._
 
   "#sqd" - (
+      padding(1 rem),
       minHeight(1 rem),
       minWidth(10 rem),
       &.hover(

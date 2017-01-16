@@ -36,10 +36,10 @@ object Header {
           li(HeaderStyles.headerSocialItem)(
             a(href := ExternalUrls.oniWebGithub, HeaderStyles.headerSocialLink, target := "_blank")(
               Image("icon_github.png", "Github"))),
-          li(HeaderStyles.headerSocialItem)(
-            a(href := ExternalUrls.stackoverflow, HeaderStyles.headerSocialLinkYellow, target := "_blank")(
-              Image("icon_stackoverflow.png", "StackOverflow"),
-              oniTooltip)),
+//          li(HeaderStyles.headerSocialItem)(
+//            a(href := ExternalUrls.stackoverflow, HeaderStyles.headerSocialLinkYellow, target := "_blank")(
+//              Image("icon_stackoverflow.png", "StackOverflow"),
+//              oniTooltip)),
           li(HeaderStyles.headerSocialItem)(
             a(href := ExternalUrls.oniservices, HeaderStyles.headerSocialLinkYellow, target := "_blank")(
               Image("oni.jpg", oni_tt),

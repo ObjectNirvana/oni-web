@@ -123,6 +123,7 @@ class ComingSoonView(model: Property[String],
   private val content = div(
     h2("What is Object Nirvana?"),
     div("Writing software in the coolest way possible."),
+    div("Help us gather all the ways."),
     div(CsStyles.cubeContainer)(
       div(id:="box_cs", `class`:="show-frontSide")(
         figure(frontSide)(div(h2("Object Oriented"), oop)),
@@ -146,9 +147,10 @@ class ComingSoonView(model: Property[String],
           li(id:=sq.get.id)(div(data.oid := sq.get.id, onclick := getSqDetails(sq.get.id.toString) _)(sq.get.desc)).render))
       ),
       div(CsStyles.rightSq)(
-        h3("Software Quality Details"),
-        h4("Quality: ", bind(model)),
-        div(id:="sqd", title:="click to edit", attr("contenteditable"):=("true"))( bind(sqDetails) ),
+        h3("Details for: ", bind(model)),
+        div(id:="sqd",
+            title:="click to edit",
+            attr("contenteditable"):=("true"))( bind(sqDetails) ),
         //p("Comments"),
         //TextInput.debounced(sqDetails, placeholder := "Describe why"),
         button(onclick := saveQualityDetails _)("Save")

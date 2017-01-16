@@ -10,6 +10,7 @@ object Dependencies {
   val jqueryVersion = "0.9.0"
   val rxScalaVersion = "0.26.4"
   val akkaVersion = "2.4.3"
+  val scalatestVersion = "3.0.0"
 
   val crossDeps = Def.setting(Seq[ModuleID](
     "io.udash" %%% "udash-core-shared" % udashVersion,
@@ -17,6 +18,7 @@ object Dependencies {
   ))
 
   val frontendDeps = Def.setting(Seq[ModuleID](
+    "org.scalatest" %%% "scalatest" % scalatestVersion % "test",
     "be.doeraene" %%% "scalajs-jquery" % jqueryVersion,
     "io.udash" %%% "udash-core-frontend" % udashVersion,
     "com.lihaoyi" %% "scalatags" % scalatagsVersion,
