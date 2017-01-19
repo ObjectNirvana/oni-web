@@ -2,7 +2,7 @@ import com.lihaoyi.workbench.Plugin._
 import UdashBuild._
 import Dependencies._
 
-name := "udash-app"
+name := "oni-web"
 
 resolvers ++= Seq(
   "Typesafe Releases Repository" at "http://repo.typesafe.com/typesafe/releases/",
@@ -17,7 +17,14 @@ resolvers += "releases" at "https://oss.sonatype.org/content/repositories/releas
 
 resolvers += "tools-releases" at "https://oss.sonatype.org/content/groups/scala-tools"
 
+libraryDependencies += "com.lihaoyi" %% "acyclic" % "0.1.5" % "provided"
+
+autoCompilerPlugins := true
+
+addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.5")
+
 version in ThisBuild := "0.1.0-SNAPSHOT"
+
 scalaVersion in ThisBuild := "2.11.8"
 organization in ThisBuild := "com.oni.udash"
 crossPaths in ThisBuild := false
@@ -32,6 +39,8 @@ scalacOptions in ThisBuild ++= Seq(
   "-Xfatal-warnings",
   "-Xlint:_,-missing-interpolator,-adapted-args"
 )
+
+//scalacOptions += "-P:acyclic:force"
 
 ScctPlugin.instrumentSettings
 
@@ -79,7 +88,11 @@ lazy val backend = project.in(file("backend"))
 lazy val frontend = project.in(file("frontend")).enablePlugins(ScalaJSPlugin)
   .dependsOn(sharedJS)
   .settings(
-    libraryDependencies ++= frontendDeps.value,
+    libraryDependencies ++= frontendDeps.value ++
+    	Seq("com.lihaoyi" %% "acyclic" % "0.1.5" % "provided"),
+	//libraryDependencies ++= "com.lihaoyi" %% "acyclic" % "0.1.5" % "provided",
+	autoCompilerPlugins := true,
+	addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.5"),
     crossLibs(Compile),
     jsDependencies ++= frontendJSDeps.value,
     persistLauncher in Compile := true,

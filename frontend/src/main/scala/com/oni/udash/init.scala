@@ -1,5 +1,7 @@
 package com.oni.udash
 
+import acyclic.file
+
 import io.udash._
 import io.udash.wrappers.jquery._
 import org.scalajs.dom.{ Element, document }
@@ -16,19 +18,6 @@ import com.oni.udash.styles.DemoStyles
 import com.oni.udash.styles.partials.FooterStyles
 import com.oni.udash.styles.partials.HeaderStyles
 import org.scalajs.dom.raw.HTMLStyleElement
-
-object Context {
-  implicit val executionContext = scalajs.concurrent.JSExecutionContext.Implicits.queue
-  private val routingRegistry = new RoutingRegistryDef
-  private val viewPresenterRegistry = new StatesToViewPresenterDef
-
-  implicit val applicationInstance = new Application[RoutingState](routingRegistry, viewPresenterRegistry, RootState)
-
-  import io.udash.rpc._
-  import com.oni.udash.rpc._
-  val serverRpc = DefaultServerRPC[MainClientRPC, MainServerRPC](new RPCService)
-
-}
 
 object Init extends JSApp with StrictLogging {
   import Context._

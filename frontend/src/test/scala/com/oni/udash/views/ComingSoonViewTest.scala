@@ -1,5 +1,7 @@
 package com.oni.udash.views
 
+import acyclic.file
+
 import org.scalatest.FunSpec
 import org.scalatest.Matchers
 import org.scalatest.BeforeAndAfter
@@ -7,7 +9,7 @@ import org.scalatest.BeforeAndAfter
 class ComingSoonViewTest extends FunSpec
     with Matchers
     with BeforeAndAfter {
-  
+
   describe("test rendering of coming soon page") {
     it("should render with styles") {
       println("here is: ")
