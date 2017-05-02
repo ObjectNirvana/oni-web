@@ -4,7 +4,7 @@ import com.oni.udash.views.BindingDemoViewPresenter
 import com.oni.udash.views.ComingSoonViewPresenter
 import com.oni.udash.views.DemoStylesViewPresenter
 import com.oni.udash.views.ErrorViewPresenter
-import com.oni.udash.views.IndexViewPresenter
+import com.oni.udash.views._
 import com.oni.udash.views.RPCDemoViewPresenter
 import com.oni.udash.views.RootViewPresenter
 
@@ -16,6 +16,8 @@ class StatesToViewPresenterDef extends ViewPresenterRegistry[RoutingState] {
     case RootState => RootViewPresenter
     case IndexState => IndexViewPresenter
     case ComingSoonState => ComingSoonViewPresenter()
+    case NewSqState => NewSqViewPresenter()
+    case SqDetailsState => SqDetailsViewPresenter()
     case BindingDemoState(urlArg) => BindingDemoViewPresenter(urlArg)
     case RPCDemoState => RPCDemoViewPresenter
     case DemoStylesState => DemoStylesViewPresenter

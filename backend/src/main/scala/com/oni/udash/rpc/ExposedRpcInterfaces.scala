@@ -4,11 +4,13 @@ import io.udash.rpc._
 
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
-import com.oni.db.SqApp
+//import com.oni.db.SqApp
 import com.oni.web.dom.Sq
 import akka.actor.ActorRef
 
 class ExposedRpcInterfaces(qualitiesService: ActorRef)(implicit clientId: ClientId) extends MainServerRPC {
+  import com.oni.db.ComponentRegistry._
+
   override def hello(name: String): Future[String] = {
     println("new code")
     Future.successful(s"Hello, $name!")
@@ -21,20 +23,21 @@ class ExposedRpcInterfaces(qualitiesService: ActorRef)(implicit clientId: Client
 
   override def saveDetails(id: String, det: String): Unit = {
     println(s"updating $det")
-    SqApp.update(Sq(id, "", Some(det)))
+    //SqApp.update(Sq(id, "", Some(det)))
+    sqDao.update(Sq(id, "", Some(det)))
   }
 
   override def save(q: String): Unit = {
     println(s"save on the server $q")
     qualitiesService ! q
-    SqApp.add(q)
+    sqDao.add(q)
     ClientRPC(clientId).updateList(List("one"))
     // ClientRPC(clientId).push(42)
   }
 
   override def getSqDetails(id: String): Future[Sq] = {
     println(s"getting $id")
-    val sq = SqApp.findById(id)
+    val sq = sqDao.findById(id)
     println(s"got $sq")
     Future( sq )
   }
@@ -47,6 +50,6 @@ class ExposedRpcInterfaces(qualitiesService: ActorRef)(implicit clientId: Client
 //    println("2 get list on the server")
     num += 1
     //Future(List("a1-" + num, "a2- " + num))
-    Future( SqApp.getAll )
+    Future( sqDao.getAll )
   }
 }

@@ -140,6 +140,17 @@ object CsStyles extends StyleSheet.Inline {
       height( 200 px )
   )
 
+  val newSqLink = style(
+      fontSize(45 px),
+      backgroundColor(yellow),
+      width( 300 px ),
+      height( 200 px ),
+      color(black),
+      &.visited(
+          color(blue)
+      )
+  )
+
   val sqContainer = style(
       width( 100 %% )
       //height( 400 px )

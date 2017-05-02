@@ -1,5 +1,7 @@
 package com.oni.udash
 
+import io.udash.RoutingRegistry
+import io.udash.Url
 import io.udash._
 import io.udash.utils.Bidirectional
 
@@ -12,6 +14,7 @@ class RoutingRegistryDef extends RoutingRegistry[RoutingState] {
 
   private val (url2State, state2Url) = Bidirectional[String, RoutingState] {
     case "" => ComingSoonState
+    case "/newsq" => NewSqState
     case "/index" => IndexState
     case "/binding" => BindingDemoState("")
     case "/binding" /:/ arg => BindingDemoState(arg)

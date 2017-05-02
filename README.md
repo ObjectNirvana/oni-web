@@ -18,8 +18,14 @@ backend/scct:test
 - Mongo DB
 - Mongo DB Casbah
 - Salat
+- RxScala
 - Akka
 - Jetty
+
+setup discourse
+
+http://stackoverflow.com/questions/12720967/how-to-change-postgresql-user-password
+ALTER USER "user_name" WITH PASSWORD 'new_password';
 
 ## SBT tools:
 

@@ -1,4 +1,5 @@
 import com.lihaoyi.workbench.Plugin._
+
 import UdashBuild._
 import Dependencies._
 
@@ -23,7 +24,7 @@ autoCompilerPlugins := true
 
 addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.5")
 
-version in ThisBuild := "0.1.0-SNAPSHOT"
+version in ThisBuild := "0.1.1-SNAPSHOT"
 
 scalaVersion in ThisBuild := "2.11.8"
 organization in ThisBuild := "com.oni.udash"
@@ -42,12 +43,12 @@ scalacOptions in ThisBuild ++= Seq(
 
 //scalacOptions += "-P:acyclic:force"
 
-ScctPlugin.instrumentSettings
+// ScctPlugin.instrumentSettings
 
 def crossLibs(configuration: Configuration) =
   libraryDependencies ++= crossDeps.value.map(_ % configuration)
 
-lazy val `udash-app` = project.in(file("."))
+lazy val `oni-web` = project.in(file("."))
   .aggregate(sharedJS, sharedJVM, frontend, backend)
   .dependsOn(backend)
   .settings(
@@ -66,9 +67,10 @@ lazy val sharedJS = shared.js
 lazy val backend = project.in(file("backend"))
   .dependsOn(sharedJVM)
   .settings(
-    libraryDependencies ++= backendDeps.value,
+    libraryDependencies ++= backendDeps.value ++
+    	Seq("com.lihaoyi" %% "acyclic" % "0.1.5" % "provided"),
     crossLibs(Compile),
-	ScctPlugin.instrumentSettings,
+	//ScctPlugin.instrumentSettings,
 
     compile <<= (compile in Compile),
     (compile in Compile) <<= (compile in Compile).dependsOn(copyStatics),
@@ -115,7 +117,7 @@ lazy val frontend = project.in(file("frontend")).enablePlugins(ScalaJSPlugin)
       (crossTarget in(Compile, packageMinifiedJSDependencies)).value / StaticFilesDir / WebContent / "scripts" / "frontend-deps.js",
     artifactPath in(Compile, packageScalaJSLauncher) :=
       (crossTarget in(Compile, packageScalaJSLauncher)).value / StaticFilesDir / WebContent / "scripts" / "frontend-init.js"
-  ).settings(workbenchSettings:_*)
+  ) .settings(workbenchSettings:_*)
   .settings(
     bootSnippet := "com.oni.udash.Init().main();",
     updatedJS := {
@@ -136,6 +138,7 @@ lazy val frontend = project.in(file("frontend")).enablePlugins(ScalaJSPlugin)
     //// use either refreshBrowsers OR updateBrowsers
     // refreshBrowsers <<= refreshBrowsers triggeredBy (compileStatics in Compile)
     updateBrowsers <<= updateBrowsers triggeredBy (compileStatics in Compile)
+ 	
   )
 
   

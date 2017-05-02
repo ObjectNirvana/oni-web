@@ -1,14 +1,11 @@
-package rxScala
+package com.oni
 
 import java.util.concurrent.atomic.AtomicBoolean
-
 import scala.language.implicitConversions
-
-//import org.mongodb.scala._
-import rx.lang.{ scala => rx }
-import rx.Observable
-import rx.Subscription
-import rx.Observer
+import rx.lang.scala.Observable
+import rx.lang.scala.Subscription
+import rx.lang.scala.Observer
+import rx.lang.{scala => rx}
 
 object Implicits {
 

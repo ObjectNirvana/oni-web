@@ -6,6 +6,7 @@ import org.scalajs.dom.Element
 import scalacss.ScalatagsCss._
 import com.oni.udash.styles.CsStyles
 import com.oni.udash.ComingSoonState
+import com.oni.udash._
 import scala.util.Success
 import scala.util.Failure
 import scala.concurrent.Future
@@ -134,6 +135,7 @@ class ComingSoonView(model: Property[String],
         figure(bottomSide)(div(h2("Nirvana"), oni))
       )
     ),
+    div(CsStyles.newSqLink)(div(margin.auto)(a(href := NewSqState.url)("Add a new software quality"))),
     div(CsStyles.sqContainer)(
       div(CsStyles.leftSq)(
         h3("Tell us what makes writing software better:"),
