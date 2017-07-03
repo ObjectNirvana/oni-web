@@ -9,20 +9,22 @@ import com.oni.udash.ComingSoonState
 import scala.util.Success
 import scala.util.Failure
 import scala.concurrent.Future
-import com.oni.web.dom.Sq
+import com.oni.web.dom.SqW
 
 case class SqDetailsViewPresenter()
   extends DefaultViewPresenterFactory[SqDetailsState.type](() => {
     import com.oni.udash.Context._
 
-    val serverQualities = SeqProperty[Sq](List(Sq("1", "empty")))
+    import SqDetailsViewPresenter._
+    
+    val serverQualities = SeqProperty[SqW](List(SqW("1", "empty")))
 
     val getList = serverRpc.getList()
     getList.onComplete {
       case Success(resp) =>
-        serverQualities.set(resp)
+        serverQualities.set(resp.map(SqW(_)))
       case Failure(_) =>
-        serverQualities.set(List(Sq("e", "Error")))
+        serverQualities.set(List(SqW("e", "Error")))
     }
 
     getList.value
@@ -35,7 +37,7 @@ case class SqDetailsViewPresenter()
 
 class SqDetailsView(model: Property[String],
     sqDetails: Property[String],
-    serverQualities: SeqProperty[Sq]) extends View {
+    serverQualities: SeqProperty[SqW]) extends View {
   import com.oni.udash.Context._
   import scalatags.JsDom.all._
 
@@ -67,22 +69,22 @@ class SqDetailsView(model: Property[String],
     println("get list")
     serverRpc.getList().onComplete {
       case Success(resp) =>
-        serverQualities.set(resp)
+        serverQualities.set(resp.map(SqW(_)))
       case Failure(_) =>
-        serverQualities.set(List(Sq("e1", "Error")))
+        serverQualities.set(List(SqW("e1", "Error")))
     }
     println("saved")
   }
 
   var cbnum = 1
 
-  var sq: Option[Sq] = None
+  var sq: Option[SqW] = None
 
   def getSqDetails(id: String)(): Unit = {
     println("get details")
     serverRpc.getSqDetails(id).onComplete {
       case Success(resp) =>
-        sq = Some(resp)
+        sq = Some(SqW(resp))
         model.set(resp.desc)
         import org.scalajs.jquery.jQuery
         jQuery("#sqd").text(resp.details.getOrElse(""))

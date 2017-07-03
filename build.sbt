@@ -26,7 +26,9 @@ addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.5")
 
 version in ThisBuild := "0.1.1-SNAPSHOT"
 
-scalaVersion in ThisBuild := "2.11.8"
+// scalaVersion in ThisBuild := "2.11.8"
+scalaVersion in ThisBuild := "2.12.1"
+
 organization in ThisBuild := "com.oni.udash"
 crossPaths in ThisBuild := false
 scalacOptions in ThisBuild ++= Seq(
