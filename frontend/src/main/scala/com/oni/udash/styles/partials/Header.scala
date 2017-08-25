@@ -11,9 +11,9 @@ import com.oni.udash.styles.fonts.UdashFonts
 import com.oni.udash.styles.utils.MediaQueries
 import com.oni.udash.styles.utils.StyleUtils
 
-import scalacss.Defaults.StyleSheet
-import scalacss.Defaults.cssComposition
-import scalacss.Defaults.cssRegister
+import scalacss.DevDefaults.StyleSheet
+import scalacss.DevDefaults.cssComposition
+import scalacss.DevDefaults.cssRegister
 
 object HeaderStyles extends StyleSheet.Inline {
   import dsl._

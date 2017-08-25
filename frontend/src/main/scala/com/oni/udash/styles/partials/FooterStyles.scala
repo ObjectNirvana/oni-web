@@ -5,7 +5,7 @@ import com.oni.udash.styles.fonts.{FontWeight, UdashFonts}
 import com.oni.udash.styles.utils.{MediaQueries, StyleUtils}
 
 import scala.language.postfixOps
-import scalacss.Defaults._
+import scalacss.DevDefaults._
 
 object FooterStyles extends StyleSheet.Inline {
   import dsl._

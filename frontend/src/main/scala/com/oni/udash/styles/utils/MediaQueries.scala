@@ -3,7 +3,7 @@ package com.oni.udash.styles.utils
 
 import com.oni.udash.styles.constants.StyleConstants
 
-import scalacss.Defaults._
+import scalacss.DevDefaults._
 import scala.language.postfixOps
 
 object MediaQueries extends StyleSheet.Inline {

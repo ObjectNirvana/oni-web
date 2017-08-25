@@ -8,9 +8,9 @@ import scala.language.postfixOps
 import com.oni.udash.styles.utils.MediaQueries
 import com.oni.udash.styles.utils.StyleUtils
 
-import scalacss.Defaults.StyleSheet
-import scalacss.Defaults.cssComposition
-import scalacss.Defaults.cssRegister
+import scalacss.DevDefaults.StyleSheet
+import scalacss.DevDefaults.cssComposition
+import scalacss.DevDefaults.cssRegister
 import scalacss.internal.Compose
 
 object OniStyles2 extends StyleSheet.Standalone {

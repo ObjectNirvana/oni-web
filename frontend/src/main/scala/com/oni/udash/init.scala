@@ -8,7 +8,7 @@ import org.scalajs.dom.{ Element, document }
 
 import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport
-import scalacss.Defaults._
+import scalacss.DevDefaults._
 import scalacss.ScalatagsCss._
 import scalatags.JsDom._
 import com.oni.udash.styles._

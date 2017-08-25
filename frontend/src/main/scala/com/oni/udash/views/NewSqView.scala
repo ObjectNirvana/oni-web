@@ -80,6 +80,10 @@ class NewSqView(model: Property[String],
     serverRpc.saveDetails(sq.get.id, details)
   }
 
+  def returnToMain() = {
+    
+  }
+
   def saveQuality() = {
     println("save q")
     serverRpc.save(model.get)
@@ -126,6 +130,8 @@ class NewSqView(model: Property[String],
     div("""We are gathering the list of software qualities, processes, features, whatever you think
            makes writing software better or more cool.
         """),
+    a(CsStyles.underlineLinkBlack, href := BindingDemoState().url)("Return to Main"),
+    button(onclick := returnToMain _)("Return to Main"),
     div(CsStyles.sqContainer)(
       div(CsStyles.leftSq)(
         h3("Tell us what makes writing software better:"),

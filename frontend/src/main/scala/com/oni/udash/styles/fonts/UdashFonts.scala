@@ -1,7 +1,7 @@
 package com.oni.udash.styles.fonts
 import scala.language.postfixOps
 import scalacss.internal.AV
-import scalacss.Defaults._
+import scalacss.DevDefaults._
 
 /*
  * font-family: 'acumin-pro', san-serif;

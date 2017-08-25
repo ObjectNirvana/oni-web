@@ -1,5 +1,5 @@
 package com.oni.udash.styles.constants
-import scalacss.Defaults._
+import scalacss.DevDefaults._
 
 object StyleConstants extends StyleSheet.Inline{
   import dsl._

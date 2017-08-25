@@ -7,7 +7,7 @@ import com.oni.udash.styles.utils.{MediaQueries, StyleUtils}
 import scala.concurrent.duration.FiniteDuration
 import scala.language.postfixOps
 import scalacss.internal.Compose
-import scalacss.Defaults._
+import scalacss.DevDefaults._
 
 object DemoStyles extends StyleSheet.Inline {
   import dsl._

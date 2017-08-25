@@ -10,7 +10,7 @@ import scala.language.postfixOps
 case object DemoStylesViewPresenter extends DefaultViewPresenterFactory[DemoStylesState.type](() => new DemoStylesView)
 
 class DemoStylesView extends View {
-  import scalacss.Defaults._
+  import scalacss.DevDefaults._
   import scalacss.ScalatagsCss._
   import scalatags.JsDom._
   import scalatags.JsDom.all._

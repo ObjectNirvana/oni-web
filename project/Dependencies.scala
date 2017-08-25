@@ -13,7 +13,7 @@ object Dependencies {
   val akkaVersion = "2.4.17"
   val scalatestVersion = "3.0.0"
   val scalazVersion = "7.2.8"
-  val scalacssVersion = "0.5.1"
+  val scalacssVersion = "0.5.3"
 
   val crossDeps = Def.setting(Seq[ModuleID](
     "io.udash" %%% "udash-core-shared" % udashVersion,

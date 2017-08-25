@@ -6,7 +6,7 @@ resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repos
 // The Play plugin
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.6.0")
 
-addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.16")
+addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.18")
 
 addSbtPlugin("com.lihaoyi" % "workbench" % "0.2.3")
 

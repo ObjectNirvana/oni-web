@@ -6,7 +6,7 @@ import com.oni.udash.styles.utils.{MediaQueries, StyleUtils}
 
 import scala.language.postfixOps
 import scalacss.internal.{Attr, Literal}
-import scalacss.Defaults._
+import scalacss.DevDefaults._
 
 object GlobalStyles extends StyleSheet.Inline {
   import dsl._

@@ -31,3 +31,10 @@ ALTER USER "user_name" WITH PASSWORD 'new_password';
 
 - sbt-scct
 - sbt-dependency-graph
+
+To have launchd start mongodb now and restart at login:
+  brew services start mongodb
+Or, if you don't want/need a background service you can just run:
+  mongod --config /usr/local/etc/mongod.conf
+==> Summary
+🍺  /usr/local/Cellar/mongodb/3.4.7: 19 files, 281.9MB

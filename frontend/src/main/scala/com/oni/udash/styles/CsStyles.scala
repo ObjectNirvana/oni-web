@@ -8,9 +8,9 @@ import scala.language.postfixOps
 import com.oni.udash.styles.utils.MediaQueries
 import com.oni.udash.styles.utils.StyleUtils
 
-import scalacss.Defaults.StyleSheet
-import scalacss.Defaults.cssComposition
-import scalacss.Defaults.cssRegister
+import scalacss.DevDefaults.StyleSheet
+import scalacss.DevDefaults.cssComposition
+import scalacss.DevDefaults.cssRegister
 import scalacss.internal.Compose
 
 object CsStyles2 extends StyleSheet.Standalone {
@@ -104,6 +104,51 @@ object CsStyles2 extends StyleSheet.Standalone {
 
 object CsStyles extends StyleSheet.Inline {
   import dsl._
+
+  val underlineLink = style(
+    position.relative,
+    display.block,
+    color.white,
+
+    &.after(
+      StyleUtils.transition(transform, new FiniteDuration(250, TimeUnit.MILLISECONDS)),
+      position.absolute,
+      top(100 %%),
+      left(`0`),
+      content := "\" \"",
+      width(100 %%),
+      borderBottomColor.white,
+      borderBottomWidth(1 px),
+      borderBottomStyle.solid,
+      transform := "scaleX(0)",
+      transformOrigin := "100% 50%"
+    ),
+
+    &.hover(
+      color.white,
+      cursor.pointer,
+      textDecoration := "none",
+
+      &.after (
+        transformOrigin := "0 50%",
+        transform := "scaleX(1)"
+      )
+    )
+  )
+
+  val underlineLinkBlack = style(
+    underlineLink,
+    display.inlineBlock,
+    color.black,
+
+    &.after(
+      borderBottomColor.black
+    ),
+
+    &.hover (
+      color.black
+    )
+  )(Compose.trust)
 
   val linkHoverAnimation = keyframes(
     (0 %%) -> keyframe(color.black),
