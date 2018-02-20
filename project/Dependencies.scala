@@ -47,7 +47,7 @@ object Dependencies {
     "io.reactivex" %% "rxscala" % rxScalaVersion,
     //"org.mongodb.scala" %% "mongo-scala-driver" % "1.2.1",
     //"org.mongodb" %% "casbah" % "3.1.1",
-    "com.github.salat" %% "salat" % "1.11.1-SNAPSHOT", // "1.11.1",
+    "com.github.salat" %% "salat" % "1.11.3-SNAPSHOT", // "1.11.1",
     "io.udash" %% "udash-rpc-backend" % udashVersion,
     "org.eclipse.jetty.websocket" % "websocket-server" % jettyVersion
   ))
