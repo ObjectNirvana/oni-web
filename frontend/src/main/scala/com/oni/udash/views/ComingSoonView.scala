@@ -123,7 +123,7 @@ class ComingSoonView(model: Property[String],
 
   private val content = div(
     h2("What is Object Nirvana?"),
-    div("Writing software in the coolest way possible."),
+    div("The best way to write software.  Let's make a list, and start using these approaches to get the job done."),
     div("Help us gather all the ways."),
     div(CsStyles.cubeContainer)(
       div(id:="box_cs", `class`:="show-frontSide")(
