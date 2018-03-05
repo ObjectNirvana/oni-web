@@ -1,7 +1,7 @@
-package com.oni.db
-
-import scala.collection.immutable.IndexedSeq
-
+//package com.oni.db
+//
+//import scala.collection.immutable.IndexedSeq
+//
 //import org.mongodb.scala._
 //import rx.lang.{ scala => rx }
 //import rxScala.Implicits._

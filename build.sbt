@@ -69,8 +69,8 @@ lazy val sharedJS = shared.js
 lazy val backend = project.in(file("backend"))
   .dependsOn(sharedJVM)
   .settings(
-    libraryDependencies ++= backendDeps.value ++
-    	Seq("com.lihaoyi" %% "acyclic" % "0.1.5" % "provided"),
+    libraryDependencies ++= backendDeps,
+    	// Seq("com.lihaoyi" %% "acyclic" % "0.1.5" % "provided"),
     crossLibs(Compile),
 	//ScctPlugin.instrumentSettings,
 
@@ -139,7 +139,7 @@ lazy val frontend = project.in(file("frontend")).enablePlugins(ScalaJSPlugin)
     },
     //// use either refreshBrowsers OR updateBrowsers
     // refreshBrowsers <<= refreshBrowsers triggeredBy (compileStatics in Compile)
-    updateBrowsers <<= updateBrowsers triggeredBy (compileStatics in Compile)
+    updateBrowsers := updateBrowsers triggeredBy (compileStatics in Compile)
  	
   )
 
