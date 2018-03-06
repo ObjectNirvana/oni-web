@@ -15,7 +15,7 @@ object ComponentRegistry
     extends SqDaoComponentImpl
     with SqServiceComponentImpl {
 
-  override val sqDao = new SqDaoImpl
+  override val sqDao: SqDao = new SqDaoImpl
 
   val SqService = new SqServiceImpl
 }
