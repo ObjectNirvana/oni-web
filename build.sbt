@@ -74,10 +74,10 @@ lazy val backend = project.in(file("backend"))
     crossLibs(Compile),
 	//ScctPlugin.instrumentSettings,
 
-    compile <<= (compile in Compile),
-    (compile in Compile) <<= (compile in Compile).dependsOn(copyStatics),
+    compile := (compile in Compile).value,
+    (compile in Compile) := (compile in Compile).dependsOn(copyStatics).value,
     copyStatics := IO.copyDirectory((crossTarget in frontend).value / StaticFilesDir, (target in Compile).value / StaticFilesDir),
-    copyStatics <<= copyStatics.dependsOn(compileStatics in frontend),
+    copyStatics := copyStatics.dependsOn(compileStatics in frontend).value,
 
     mappings in (Compile, packageBin) ++= {
       copyStatics.value
@@ -99,9 +99,9 @@ lazy val frontend = project.in(file("frontend")).enablePlugins(ScalaJSPlugin)
 	addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.5"),
     crossLibs(Compile),
     jsDependencies ++= frontendJSDeps.value,
-    persistLauncher in Compile := true,
+    scalaJSUseMainModuleInitializer in Compile := true,
 
-    compile <<= (compile in Compile).dependsOn(compileStatics),
+    compile := (compile in Compile).dependsOn(compileStatics).value,
     compileStatics := {
       IO.copyDirectory(sourceDirectory.value / "main/assets/fonts", crossTarget.value / StaticFilesDir / WebContent / "assets/fonts")
       IO.copyDirectory(sourceDirectory.value / "main/assets/images", crossTarget.value / StaticFilesDir / WebContent / "assets/images")
@@ -117,8 +117,8 @@ lazy val frontend = project.in(file("frontend")).enablePlugins(ScalaJSPlugin)
       (crossTarget in(Compile, packageJSDependencies)).value / StaticFilesDir / WebContent / "scripts" / "frontend-deps-fast.js",
     artifactPath in(Compile, packageMinifiedJSDependencies) :=
       (crossTarget in(Compile, packageMinifiedJSDependencies)).value / StaticFilesDir / WebContent / "scripts" / "frontend-deps.js",
-    artifactPath in(Compile, packageScalaJSLauncher) :=
-      (crossTarget in(Compile, packageScalaJSLauncher)).value / StaticFilesDir / WebContent / "scripts" / "frontend-init.js"
+    artifactPath in(Compile, scalaJSUseMainModuleInitializer) :=
+      (crossTarget in(Compile, scalaJSUseMainModuleInitializer)).value / StaticFilesDir / WebContent / "scripts" / "frontend-init.js"
   ) .settings(workbenchSettings:_*)
   .settings(
     bootSnippet := "com.oni.udash.Init().main();",

@@ -8,7 +8,7 @@ object DepsVerifyPlugin extends sbt.AutoPlugin {
     publishConfiguration := {
       val old = publishConfiguration.value
       val ur = update.value
-      ur.configuration("compile") foreach { compileReport =>
+      ur.configuration(librarymanagement.ConfigRef("compile")) foreach { compileReport =>
         val allModules = compileReport.allModules
         val snapshotDeps = allModules filter { _.revision contains "SNAPSHOT" }
         if (snapshotDeps.nonEmpty) {
