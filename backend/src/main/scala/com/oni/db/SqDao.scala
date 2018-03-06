@@ -63,6 +63,7 @@ trait SqDaoComponentImpl extends SqDaoComponent {
     }
   
     override def getAll: List[Sq] = {
+      println("get all")
       SqDaoSalatImpl.find(ref = MongoDBObject()).toList.map(_.toDomSmall)
     }
   }

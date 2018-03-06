@@ -1,5 +1,6 @@
 package com.oni.udash.views
 
+import scala.concurrent.duration._
 import io.udash._
 import com.oni.udash._
 import org.scalajs.dom.Element
@@ -11,10 +12,14 @@ import scala.util.Success
 import scala.util.Failure
 import scala.concurrent.Future
 import com.oni.web.dom.Sq
+import scala.concurrent.Await
+import scala.language.postfixOps
 
 case class ComingSoonViewPresenter()
   extends DefaultViewPresenterFactory[ComingSoonState.type](() => {
     import com.oni.udash.Context._
+
+    println("save qd")
 
     val serverQualities = SeqProperty[Sq](List(Sq("1", "empty")))
 
@@ -25,9 +30,7 @@ case class ComingSoonViewPresenter()
       case Failure(_) =>
         serverQualities.set(List(Sq("e", "Error")))
     }
-
-    getList.value
-    // Future.sequence(getList)
+    // Await.result(getList, 1 minute)
 
     val model = Property[String]("/")
     val sqDetails = Property[String]("")
