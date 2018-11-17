@@ -9,6 +9,8 @@ backend/scct:test
 
 ## This project uses these tools:
 
+changing to 2.12
+
 - Scala 2.11
 - Scala.js
 - Udash
