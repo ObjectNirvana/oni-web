@@ -1,6 +1,6 @@
 package com.oni.web.dom
 
-import io.udash.properties.{ModelPart, PropertyCreator, seq}
+import io.udash.properties.{/*ModelPart*/ PropertyCreator, seq}
 
 /**
  * 

@@ -3,7 +3,7 @@ package com.oni.udash
 import io.udash.RoutingRegistry
 import io.udash.Url
 import io.udash._
-import io.udash.utils.Bidirectional
+//import io.udash.utils.Bidirectional
 
 class RoutingRegistryDef extends RoutingRegistry[RoutingState] {
   override def matchUrl(url: Url): RoutingState =
