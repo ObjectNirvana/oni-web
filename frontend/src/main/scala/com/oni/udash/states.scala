@@ -12,6 +12,8 @@ case object RootState extends RoutingState(null)
 case object ErrorState extends RoutingState(RootState)
 
 case object IndexState extends RoutingState(RootState)
+case object IndexOoState extends RoutingState(RootState)
+case object HomeState extends RoutingState(RootState)
 
 case object ComingSoonState extends RoutingState(RootState)
 case object NewSqState extends RoutingState(RootState)

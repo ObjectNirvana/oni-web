@@ -15,14 +15,16 @@ import com.oni.web.dom.Sq
 import scala.concurrent.Await
 import scala.language.postfixOps
 
-case class ComingSoonViewPresenter()
-  extends DefaultViewPresenterFactory[ComingSoonState.type](() => {
+object HomeViewPresenter {
+    import com.oni.udash.Context._
+    val serverQualities = SeqProperty[Sq](List(Sq("1", "empty")))
+}
+case class HomeViewPresenter()
+  extends DefaultViewPresenterFactory[HomeState.type](() => {
     import com.oni.udash.Context._
     import HomeViewPresenter._
 
     println("save qd")
-
-    // val serverQualities = SeqProperty[Sq](List(Sq("1", "empty")))
 
     val getList = serverRpc.getList()
     getList.onComplete {
@@ -33,12 +35,12 @@ case class ComingSoonViewPresenter()
     }
     // Await.result(getList, 1 minute)
 
-    val model = Property[String]("/coming")
+    val model = Property[String]("/")
     val sqDetails = Property[String]("")
-    new ComingSoonView(model, sqDetails, serverQualities)
+    new HomeView(model, sqDetails, serverQualities)
   })
 
-class ComingSoonView(model: Property[String],
+class HomeView(model: Property[String],
     sqDetails: Property[String],
     serverQualities: SeqProperty[Sq]) extends View {
   import com.oni.udash.Context._
@@ -127,46 +129,10 @@ class ComingSoonView(model: Property[String],
 
   private val content = div(
     h2("What is Object Nirvana?"),
-    div("The best way to write software.  Let's make a list, and start using these approaches to get the job done."),
-    div("Help us gather all the ways."),
-    div(CsStyles.cubeContainer)(
-      div(id:="box_cs", `class`:="show-frontSide")(
-        figure(frontSide)(div(h2("Object Oriented"), oop)),
-        figure(backSide)(div(h2("Functional Programming"), fp)),
-        figure(rightSide)(div(h2("First Class"), fc)),
-        figure(leftSide)(div(h2("Aspect Oriented"), aop)),
-        figure(topSide)(div(h2("Cybersecurity"), sec)),
-        figure(bottomSide)(div(h2("Nirvana"), oni))
-      )
-    ),
-    div(CsStyles.newSqLink)(div(margin.auto)(a(href := NewSqState.url)("Add a new software quality"))),
-    div(CsStyles.sqContainer)(
-      div(CsStyles.leftSq)(
-        h3("Tell us what makes writing software better:"),
-        TextInput.debounced(model, placeholder := "Enter your favorite software quality..."),
-        p("Your quality: ", bind(model)),
-        button(onclick := saveQuality _)("Submit Quality")
-      ),
-      div(CsStyles.middleSq)(
-        h3("Submitted Qualities"),
-        ol( repeat(serverQualities)(sq =>
-          li(id:=sq.get.id)(div(data.oid := sq.get.id, onclick := getSqDetails(sq.get.id.toString) _)(sq.get.desc)).render))
-      ),
-      div(CsStyles.rightSq)(
-        h3("Details for: ", bind(model)),
-        div(id:="sqd",
-            title:="click to edit",
-            attr("contenteditable"):=("true"))( bind(sqDetails) ),
-        //p("Comments"),
-        //TextInput.debounced(sqDetails, placeholder := "Describe why"),
-        button(onclick := saveQualityDetails _)("Save")
-      )
-
-    ),
     div( id:="options") (
       p(onclick := startSpin _)("start spin"),
       p( id:="show-buttons")(
-          buttons
+          "New product coming soon!"
       )
     ),
     script("""
